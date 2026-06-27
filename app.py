@@ -5,7 +5,7 @@ import requests
 app = Flask(__name__)
 
 # ============================
-# TRANG CHỦ
+# Trang chủ
 # ============================
 
 @app.route("/")
@@ -14,12 +14,13 @@ def home():
 
 
 # ============================
-# NHẬN DỮ LIỆU TỪ FORM
+# Xử lý đặt lịch
 # ============================
 
 @app.route("/submit", methods=["POST"])
 def submit():
 
+    # Lấy dữ liệu từ form
     name = request.form.get("name")
     age = request.form.get("age")
     phone = request.form.get("phone")
@@ -28,6 +29,7 @@ def submit():
 
     time = datetime.now().strftime("%d/%m/%Y %H:%M")
 
+    # Dữ liệu gửi sang Google Apps Script
     data = {
         "name": name,
         "age": age,
@@ -37,7 +39,12 @@ def submit():
         "time": time
     }
 
+    # ===== DEBUG =====
+    print("========== DỮ LIỆU NHẬN ĐƯỢC ==========")
+    print(data)
+
     try:
+
         url = "https://script.google.com/macros/s/AKfycbyzyVlqaoWKVvdpw-QBKm4goBZL9Cqkpd7Dht9QK7-Xx2-A3W4agXvCqE1i6H2x4SqV3A/exec"
 
         response = requests.post(
@@ -55,27 +62,46 @@ def submit():
     return """
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
+
 <meta charset="UTF-8">
+
 <title>Glow & Beauty</title>
 
 <style>
 
 body{
+
 font-family:Arial;
+
 background:#fff5f8;
-text-align:center;
-padding-top:100px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+height:100vh;
+
+margin:0;
+
 }
 
 .box{
 
 width:500px;
-margin:auto;
+
 background:white;
+
 padding:40px;
+
 border-radius:20px;
-box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+text-align:center;
 
 }
 
@@ -89,16 +115,26 @@ p{
 
 font-size:18px;
 
+color:#555;
+
 }
 
 button{
 
+margin-top:20px;
+
 padding:12px 25px;
+
 border:none;
+
 background:#ff4f8b;
+
 color:white;
+
 border-radius:10px;
+
 cursor:pointer;
+
 font-size:16px;
 
 }
@@ -119,24 +155,12 @@ background:#e64079;
 
 <h2>🌸 Đặt lịch thành công!</h2>
 
-<p>
+<p>Cảm ơn bạn đã đăng ký dịch vụ tại <b>Glow & Beauty Spa</b>.</p>
 
-Cảm ơn bạn đã đăng ký dịch vụ tại <b>Glow & Beauty</b>.
-
-</p>
-
-<p>
-
-Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.
-
-</p>
-
-<br>
+<p>Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.</p>
 
 <button onclick="window.location='/'">
-
 Quay lại
-
 </button>
 
 </div>
@@ -144,7 +168,6 @@ Quay lại
 </body>
 
 </html>
-
 """
 
 
