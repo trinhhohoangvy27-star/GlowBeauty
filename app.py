@@ -22,6 +22,7 @@ def submit():
 
     # Lấy dữ liệu từ form
     name = request.form.get("name")
+    gender = request.form.get("gender")
     age = request.form.get("age")
     phone = request.form.get("phone")
     service = request.form.get("service")
@@ -33,6 +34,7 @@ def submit():
     data = {
         "name": name,
         "age": age,
+        "gender": gender,
         "phone": phone,
         "service": service,
         "date": date,
