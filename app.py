@@ -21,6 +21,7 @@ def home():
 def submit():
 
     name = request.form.get("name")
+    age = request.form.get("age")
     phone = request.form.get("phone")
     service = request.form.get("service")
     date = request.form.get("date")
@@ -29,6 +30,7 @@ def submit():
 
     data = {
         "name": name,
+        "age": age,
         "phone": phone,
         "service": service,
         "date": date,
