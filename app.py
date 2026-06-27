@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from datetime import datetime
+import pytz
 import requests
 
 app = Flask(__name__)
@@ -28,7 +29,8 @@ def submit():
     service = request.form.get("service")
     date = request.form.get("date")
 
-    time = datetime.now().strftime("%d/%m/%Y %H:%M")
+    tz = pytz.timezone("Asia/Ho_Chi_Minh")
+    time = datetime.now(tz).strftime("%d/%m/%Y %H:%M")
 
     # Dữ liệu gửi sang Google Apps Script
     data = {
